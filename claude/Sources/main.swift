@@ -279,7 +279,8 @@ func makeBorderlessWindow(_ frame: NSRect) -> NSWindow {
     w.hasShadow = false
     w.isReleasedWhenClosed = false
     w.level = .normal
-    w.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .ignoresCycle]
+    // 让 AppKit 在调度中心暂时隐藏浮层，避免它和目标窗口被分开排列。
+    w.collectionBehavior = [.canJoinAllSpaces, .transient, .fullScreenAuxiliary, .ignoresCycle]
     return w
 }
 
